@@ -57,14 +57,17 @@ The `contrib/` directory includes a number of useful hooks, and can be set by do
 You can even specify _multiple_ directories for your global hooks! Simply separate each path with spaces.
 
 
+Listing hooks
+=============
+
+When `git hooks` is run without arguments, it lists all hooks installed on your system.  It will run the hooks with the `--about` argument to generate the description shown.  
+
+Check out the hooks in `contrib/` for some examples.
+
+
 Creating hooks
 ==============
 
 To keep things organized, git-hooks looks for scripts in **sub-directories** named after the git hook name.  For example, this project has the following `pre-commit` script in the following location:
 
 	   git_hooks/pre-commit/bsd
-
-When `git hooks` is run without arguments, it lists all hooks installed on your system.  It will run the hooks with the `--about` argument to generate the description shown.  
-
-Check out the hooks in `contrib/` for some examples.
-
