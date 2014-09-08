@@ -51,9 +51,9 @@ function list_hooks_in_dir
     level="${2}"
     find --help 2>&1 | grep -- '-L' 2>/dev/null >/dev/null
     if [ $? -eq 1 ] ; then
-        find "${path}/" -mindepth ${level} -maxdepth ${level} -perm +111 -type f 2>/dev/null | grep -v "^.$" | sort
+        find "${path}/" -mindepth ${level} -maxdepth ${level} -perm /111 -type f 2>/dev/null | grep -v "^.$" | sort
     else
-        find -L "${path}/" -mindepth ${level} -maxdepth ${level} -perm +111 -type f 2>/dev/null | grep -v "^.$" | sort
+        find -L "${path}/" -mindepth ${level} -maxdepth ${level} -perm /111 -type f 2>/dev/null | grep -v "^.$" | sort
     fi
 }
 
