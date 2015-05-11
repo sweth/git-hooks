@@ -70,14 +70,32 @@ function list_hooks
         #echo "Git hooks are NOT installed in this repository. (Run 'git hooks --install' to install it)"
         #echo ""
     #fi
+    local dir_names=(User Repository Global)
+    local directories=$(hook_dirs)
+    local index=0
+
+    local hook_name=
+    local last_dir=
+    local current_dir=
+
+    local space_size=35
+    local about=
 
     echo 'Listing User, Project, and Global hooks:'
-    echo '---'
-    for dir in `hook_dirs`; do
-        echo "${dir}:"
+    echo ""
+
+    for dir in $directories; do
+        echo -e "\033[0;33m${dir_names[$index]}\033[0m - ${dir} "
+        index=$(($index+1))
         for hook in `list_hooks_in_dir "${dir}" 2` ; do
-            echo -n `basename \`dirname "${hook}"\``
-            echo -e "/`basename "${hook}"` \t- `${hook} --about`"
+            hook_name=$(basename "$hook")
+            current_dir=$(dirname "$hook")
+            if [ "$current_dir" != "$last_dir" ]; then
+                echo $(basename "$current_dir")
+                last_dir="$current_dir"
+            fi
+            about=$(${hook} "--about")
+            echo "  "$(printf "%-${space_size}s%s" $(echo -e "\033[1;36m${hook_name}\033[0m___" | sed -e 's/-/_/g' )  | sed -e 's/ /-/g' -e 's/_/ /g' )"- $about"
         done
         echo ""
     done
