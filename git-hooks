@@ -62,14 +62,6 @@ function list_hooks
     GITDIR=`git rev-parse --git-dir`
     cat "${GITDIR}/hooks/pre-commit" 2> /dev/null | grep 'git-hooks' > /dev/null 2> /dev/null
 
-    # Comment it. This feature is not available
-    #if [ $? = 0 ] ; then
-        #echo "Git hooks ARE installed in this repository."
-        #echo ""
-    #else
-        #echo "Git hooks are NOT installed in this repository. (Run 'git hooks --install' to install it)"
-        #echo ""
-    #fi
     local dir_names=(User Repository Global)
     local directories=$(hook_dirs)
     local index=0
