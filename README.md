@@ -47,7 +47,7 @@ Locations
 git-hooks provide a way to manage and share your hooks using three locations:
 
  - **User hooks**, installed in `~/.git_hooks/`
- - **Project hooks**, installed in `.git/git_hooks/` in a project.
+ - **Project hooks**, installed in `git_hooks/` or `.githooks/` in a project.
  - **Global hooks**, specified with the `hooks.global` configuration option.
 
 The `contrib/` directory includes a number of useful hooks, and can be set by doing the following:
