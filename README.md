@@ -7,9 +7,16 @@ When a hook is called by `git`, git-hooks will check each of these locations for
 Install
 =======
 
-Add git-hooks to your `PATH` environment variable so `git hooks` can be run.
+Just download the `git-hooks` executable found in the root of this repository to a directory of your
+choice and ensure that it is added to your `PATH` environment variable so `git hooks` can be run.
 
-Run `git hooks --install` in a git project tell it to use git-hooks hooks.  You can run `git hooks --uninstall` at any time to revert to your previous hooks.  (These are usually the default hooks, which do nothing.)
+For the latest master version, and assuming you want to put the executable in `/usr/local/bin/`:
+```
+$ curl -o /usr/local/bin/git-hooks https://raw.githubusercontent.com/icefox/git-hooks/master/git-hooks
+$ chmod +x /usr/local/bin/git-hooks
+```
+
+Run `git hooks --install` in a git project to tell it to use git-hooks hooks.  You can run `git hooks --uninstall` at any time to revert to your previous hooks.  (These are usually the default hooks, which do nothing.)
 
 Run `git hooks --installglobal` to force any new git repository or any git repository you clone to have a reminder to install git hooks. (It can't be on by default for security reasons.)
 
