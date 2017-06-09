@@ -7,10 +7,10 @@ When a hook is called by `git`, git-hooks will check each of these locations for
 Install
 =======
 
-Just download the `git-hooks` binary found in the root of this repository to a directory of your
+Just download the `git-hooks` executable found in the root of this repository to a directory of your
 choice and ensure that it is added to your `PATH` environment variable so `git hooks` can be run.
 
-For the latest master version, and assuming you want to put the binary in `/usr/local/bin/`:
+For the latest master version, and assuming you want to put the executable in `/usr/local/bin/`:
 ```
 $ curl -o /usr/local/bin/git-hooks https://raw.githubusercontent.com/icefox/git-hooks/master/git-hooks
 $ chmod +x /usr/local/bin/git-hooks
