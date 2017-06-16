@@ -8,7 +8,12 @@ Install
 =======
 
 Just download the `git-hooks` executable found in the root of this repository to a directory of your
-choice and ensure that it is added to your `PATH` environment variable so `git hooks` can be run.
+choice and ensure that it is added to your `PATH` environment variable so `git-hooks` can be run.
+
+**A quick note on git subcommands**: When you type `git hooks` git actually looks for an 
+executable called `git-hooks`. This is done automatically, so although we're directly invoking 
+the executable (`git-hooks`) in the examples below, you can also use `git hooks` interchangably, since 
+git will invoke `git-hooks` in the background when you run `git hooks`.
 
 For the latest master version, and assuming you want to put the executable in `/usr/local/bin/`:
 ```
@@ -16,9 +21,12 @@ $ curl -o /usr/local/bin/git-hooks https://raw.githubusercontent.com/icefox/git-
 $ chmod +x /usr/local/bin/git-hooks
 ```
 
-Run `git hooks --install` in a git project to tell it to use git-hooks hooks.  You can run `git hooks --uninstall` at any time to revert to your previous hooks.  (These are usually the default hooks, which do nothing.)
+Run `git-hooks --install` in a git project to tell it to use git-hooks hooks.  You can run 
+`git-hooks --uninstall` at any time to revert to your previous hooks.  (These are usually the 
+default hooks, which do nothing.)
 
-Run `git hooks --installglobal` to force any new git repository or any git repository you clone to have a reminder to install git hooks. (It can't be on by default for security reasons.)
+Run `git-hooks --install-global` to force any new git repository or any git repository you clone 
+to have a reminder to install git hooks. (It can't be on by default for security reasons.)
 
 
 Overview
@@ -67,7 +75,7 @@ You can even specify _multiple_ directories for your global hooks! Simply separa
 Listing hooks
 =============
 
-When `git hooks` is run without arguments, it lists all hooks installed on your system.  It will run the hooks with the `--about` argument to generate the description shown.  
+When `git-hooks` is run without arguments, it lists all hooks installed on your system.  It will run the hooks with the `--about` argument to generate the description shown.  
 
 Check out the hooks in `contrib/` for some examples.
 
