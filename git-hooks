@@ -109,9 +109,6 @@ function run_hooks
         return 1
     fi
     shift 1
-    while read LINE ; do
-        STDIN+=$LINE
-    done
     list_hooks_in_dir "${dir}" 1 | while read hook ; do
         export last_run_hook="${hook} $@"
         if [ ! -z ${GIT_HOOKS_VERBOSE} ] ; then
@@ -119,7 +116,7 @@ function run_hooks
             echo -n `basename \`dirname "${hook}"\``
             echo "/`basename "${hook}"`"
         fi
-        echo "$STDIN" | "${hook}" "$@"
+        echo -n "$STDIN" | "${hook}" "$@"
     done
 }
 
@@ -127,7 +124,9 @@ function run_hook
 {
     set -e
     while read LINE ; do
-        STDIN+=$LINE
+        echo "LINE: $LINE"
+        STDIN+="$LINE"
+        STDIN+=$'\n'
     done
     hook=`basename "${1}"`
     if [ -z ${hook} ] ; then
@@ -139,7 +138,7 @@ function run_hook
         if [ ! -d "${dir}" ] ; then
             continue
         fi
-        echo "$STDIN" | run_hooks "${dir}" "$@"
+        run_hooks "${dir}" "$@"
     done
     set +e
 }
