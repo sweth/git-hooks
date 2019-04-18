@@ -94,7 +94,7 @@ function list_hooks
                 echo $(basename "$current_dir")
                 last_dir="$current_dir"
             fi
-            about=$(${hook} "--about")
+            about=$("${hook}" "--about")
             echo "  "$(printf "%-${space_size}s%s" $(echo -e "\033[1;36m${hook_name}\033[0m___" | sed -e 's/-/_/g' )  | sed -e 's/ /-/g' -e 's/_/ /g' )"- $about"
         done
         echo ""
