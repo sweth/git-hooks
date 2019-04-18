@@ -37,7 +37,7 @@ function hook_dirs
     git rev-parse --git-dir &> /dev/null
     if [ $? -eq 0 ]; then
     if [ $(git rev-parse --is-bare-repository) = 'false' ]; then
-        cd $(git rev-parse --show-toplevel)
+        cd "$(git rev-parse --show-toplevel)"
         echo "${PWD}/git_hooks${hook}"
         echo "${PWD}/.githooks${hook}"
     fi
@@ -71,7 +71,6 @@ function list_hooks
     cat "${GITDIR}/hooks/pre-commit" 2> /dev/null | grep 'git-hooks' > /dev/null 2> /dev/null
 
     local dir_names=(User Repository Global)
-    local directories=$(hook_dirs)
     local index=0
 
     local hook_name=
@@ -84,7 +83,8 @@ function list_hooks
     echo 'Listing User, Project, and Global hooks:'
     echo ""
 
-    for dir in $directories; do
+    hook_dirs | while read dir ; do
+        if [[ -z "$dir" ]] ; then continue ; fi
         echo -e "\033[0;33m${dir_names[$index]}\033[0m - ${dir} "
         index=$(($index+1))
         for hook in `list_hooks_in_dir "${dir}" 2` ; do
