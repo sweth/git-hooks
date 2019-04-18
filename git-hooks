@@ -26,6 +26,12 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+# capture stdin so that it can be passed to hooks that need it
+while read LINE ; do
+    STDIN+="$LINE"
+    STDIN+=$'\n'
+done
+
 function hook_dirs
 {
     if [ ! -z "${1}" ] ; then
@@ -123,11 +129,6 @@ function run_hooks
 function run_hook
 {
     set -e
-    while read LINE ; do
-        echo "LINE: $LINE"
-        STDIN+="$LINE"
-        STDIN+=$'\n'
-    done
     hook=`basename "${1}"`
     if [ -z ${hook} ] ; then
         echo "run requires a hook argument"
