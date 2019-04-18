@@ -87,7 +87,7 @@ function list_hooks
         if [[ -z "$dir" ]] ; then continue ; fi
         echo -e "\033[0;33m${dir_names[$index]}\033[0m - ${dir} "
         index=$(($index+1))
-        for hook in `list_hooks_in_dir "${dir}" 2` ; do
+        list_hooks_in_dir "${dir}" 2 | while read hook ; do
             hook_name=$(basename "$hook")
             current_dir=$(dirname "$hook")
             if [ "$current_dir" != "$last_dir" ]; then
@@ -109,15 +109,14 @@ function run_hooks
         return 1
     fi
     shift 1
-    for hook in `list_hooks_in_dir "${dir}" 1`
-    do
+    list_hooks_in_dir "${dir}" 1 | while read hook ; do
         export last_run_hook="${hook} $@"
         if [ ! -z ${GIT_HOOKS_VERBOSE} ] ; then
             echo -n "@@ Running hook: "
             echo -n `basename \`dirname "${hook}"\``
             echo "/`basename "${hook}"`"
         fi
-        ${hook} "$@"
+        "${hook}" "$@"
     done
 }
 
@@ -130,7 +129,7 @@ function run_hook
         return 1
     fi
     shift 1
-    for dir in `hook_dirs "${hook}"`; do
+    hook_dirs "${hook}" | while read dir; do
         if [ ! -d "${dir}" ] ; then
             continue
         fi
