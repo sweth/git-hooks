@@ -1,3 +1,8 @@
+(This is sweth's fork that fixes handling of things like paths with embedded whitespace, as
+well as making the push hooks properly cascade stdin so that they actually work.  I've got
+a PR open to icefox's repo but as that has received no response, I guess I'm maintaining a fork
+here of my own with my changes merged to master so people can more easily use them?)
+
 **git-hooks** - A tool to manage project, user, and global Git hooks for multiple git repositories.
 
 git-hooks lets hooks be installed inside git repositories, users home directory, and globally.  
